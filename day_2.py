@@ -2,6 +2,9 @@ import numpy as np
 import pdb
 from helpers.import_data import ImportData
 
+COUNT_METHOD = 'count'
+POSITION_METHOD = 'position'
+
 class DataSplitter:
     def __init__(self, dataset):
         self.dataset = dataset
@@ -18,17 +21,24 @@ class PasswordChecker:
     def __init__(self, data):
         self.data = data
 
-    def checkValidPasswords(self):
+    def checkValidPasswords(self, check_method=COUNT_METHOD):
         count = 0
         for password in self.data:
             bounds = password[0].split("-")
-            lower_bound = int(bounds[0])
-            upper_bound = int(bounds[1])
+            value_one = int(bounds[0])
+            value_two = int(bounds[1])
             letter = password[1]
             password_to_check = password[2]
-            if self._passwordValid(lower_bound, upper_bound, letter, password_to_check):
+            if self._check_method(check_method, value_one, value_two, letter, password_to_check):
                 count += 1
+
         return count
+
+    def _check_method(self, check_method, value_one, value_two, letter, password_to_check):
+        if check_method == COUNT_METHOD:
+            return self._passwordValid(value_one, value_two, letter, password_to_check)
+        elif check_method == POSITION_METHOD:
+            return self._positionValid(value_one - 1, value_two -1, letter, password_to_check) 
 
     def _passwordValid(self, lower_bound, upper_bound, letter, password):
         character_count = self._letter_counter(password, letter)
@@ -43,7 +53,9 @@ class PasswordChecker:
             if char == character:
                 count += 1
         return count
-
+    
+    def _positionValid(self, first_position, second_position, letter, password):
+        return (password[first_position] == letter) ^ (password[second_position] == letter)
 
 if __name__ == "__main__":
     dataFile = ImportData("dataset/day_2.data")
@@ -53,3 +65,5 @@ if __name__ == "__main__":
     count = password_checker.checkValidPasswords()
     print(count)
 
+    count = password_checker.checkValidPasswords('position')
+    print(count)
