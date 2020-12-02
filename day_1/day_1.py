@@ -20,26 +20,48 @@ class CheckData:
         self.dataset = np.array(dataset)
         self.result = []
 
-    def findTarget(self, target_value):
+    def findTwoValuesForTarget(self, target_value):
         result = []
         for data_value in self.dataset:
             target_value_in_array = target_value - data_value
             if self._checkValueInDataset(self.dataset, target_value_in_array):
                 result.append(target_value_in_array)
+                result.append(data_value)
+                break
+        return result
 
-        calculate_result = result[0] * result[1]
-        print(f'values found, {result[0]} * {result[1]} = {calculate_result}')
 
-    def findCubeTarget(self, target_value):
+    def findThreeValuesForTarget(self, target_value):
         result = []
+        for i in self.dataset:
+            for j in self.dataset:
+                if i == j or i + j >= target_value:
+                    continue
+                target_value_in_array = target_value - i - j
+                if self._checkValueInDataset(self.dataset, target_value_in_array):
+                    result.append(target_value_in_array)
+                    result.append(i)
+                    result.append(j)
+                    break
+            if len(result) > 0:
+                break
+        return result
+
 
     def _checkValueInDataset(self, dataset, value):
         return np.where(dataset == value)[0].size > 0
 
+class Calculator:
+    def calculate(result_set):
+        calculate_result = np.prod(result_set)
+        print(calculate_result)
 
 if __name__ == "__main__":
 
     data_file = ImportData("day_1.data")
     checker = CheckData(data_file.dataset)
-    checker.findTarget(2020)
+    results = checker.findTwoValuesForTarget(2020)
+    Calculator.calculate(results)
     
+    results = checker.findThreeValuesForTarget(2020)
+    Calculator.calculate(results)
