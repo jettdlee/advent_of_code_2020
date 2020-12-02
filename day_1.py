@@ -1,19 +1,6 @@
 import pdb
 import numpy as np
-
-class ImportData:
-    def __init__(self, fileName):
-        with open(fileName, 'r') as f:
-            self.dataset = []
-            for line in f:
-                result = self.__convertLine(line)
-                self.dataset.append(result)
-    
-    def __convertLine(self, line):
-        result = line
-        result = result.strip('\n')
-        result = int(result)
-        return result
+from helpers.import_data import ImportData
 
 class CheckData:
     def __init__(self, dataset):
@@ -58,7 +45,7 @@ class Calculator:
 
 if __name__ == "__main__":
 
-    data_file = ImportData("dataset/day_1.data")
+    data_file = ImportData("dataset/day_1.data", True)
     checker = CheckData(data_file.dataset)
     results = checker.findTwoValuesForTarget(2020)
     Calculator.calculate(results)
