@@ -40,4 +40,17 @@ if __name__ == "__main__":
     data_file = ImportData('dataset/day_3.data')
     trajectory = TobogganTrajectory(data_file.dataset) 
     result = trajectory.calculateTrajectory(3, 1)
-    print(result)
+    print(f"Part one: Hit - {result[0]}, Miss - {result[1]}")
+
+    routes = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
+    result = { 'hit': [], 'miss': [] }
+    for route in routes:
+        route_result = trajectory.calculateTrajectory(route[0], route[1])
+        result['hit'].append(route_result[0])
+        result['miss'].append(route_result[1])
+    
+    prod_result = np.prod(result['hit'])
+    print(f"Part Two:")
+    print(f"Moves: {routes}")
+    print(f"Results: {result}")
+    print(f"Prod Result of Hits: {prod_result}")
