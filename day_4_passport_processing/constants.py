@@ -1,0 +1,8 @@
+BIRTH_YEAR = "byr"
+ISSUE_YEAR = "iyr"
+EXPIRATION_YEAR = "eyr"
+HEIGHT = "hgt"
+HAIR_COLOUR = "hcl"
+EYE_COLOUR = "ecl"
+PASSPORT_ID = "pid"
+COUNTRY_ID = "cid"
