@@ -3,5 +3,5 @@ import re
 
 class EyeColourValidator:
     def validate(self, value):
-        return len(re.findall("^(amb|blu|brn|gry|hzl|oth)",value)) > 0
+        return len(re.findall("^(amb|blu|grn|brn|gry|hzl|oth)",value)) > 0
 
