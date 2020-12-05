@@ -9,3 +9,5 @@ COUNTRY_ID = "cid"
 
 CM_UNIT = "cm"
 IN_UNIT = "in"
+
+EYE_COLOURS = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']

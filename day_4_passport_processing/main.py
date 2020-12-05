@@ -8,7 +8,9 @@ if __name__ == "__main__":
     dataFile = ImportData('dataset.data')
     passportReader = PassportReader(dataFile.dataset)
     passportReader.processPassports()
-    print(len(passportReader.passports))
-    passportValidator = PassportValidator(passportReader.passports)
-    result = passportValidator.validateCorrectPassports()
-    print(result)
+
+    passportValidator = PassportValidator()
+    passports_with_all_fields_present = passportValidator.validateFieldsPresentPassports(passportReader.passports)
+    print(len(passports_with_all_fields_present))
+    passports_with_all_fields_legal = passportValidator.validateFieldsCorrectPassports(passports_with_all_fields_present)
+    print(len(passports_with_all_fields_legal))
