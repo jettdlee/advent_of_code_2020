@@ -6,3 +6,6 @@ HAIR_COLOUR = "hcl"
 EYE_COLOUR = "ecl"
 PASSPORT_ID = "pid"
 COUNTRY_ID = "cid"
+
+CM_UNIT = "cm"
+IN_UNIT = "in"
