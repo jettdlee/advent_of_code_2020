@@ -24,17 +24,14 @@ class TicketChecker:
         for seating_char in row_string:
             seating_range = int((len(seat_row) / 2))
             if len(seat_row) == 2:
-                pdb.set_trace()
-                if seating_char == "F":
+                if seating_char == "B":
                     seat_row = seat_row[1]
                 else:
                     seat_row = seat_row[0]
                 break
-            elif seating_char == "F":
-                pdb.set_trace()
+            elif seating_char == "B":
                 seat_row = seat_row[seating_range:]
             else: 
-                pdb.set_trace()
                 seat_row = seat_row[:seating_range]
         return seat_row
 
@@ -67,7 +64,7 @@ if __name__ == '__main__':
     print(len(data_file.dataset))
     print(len(results))
     for result in results:
-        if result['seat_id'] == 959:
+        if result['seat_id'] == 826:
             print(result)
         seat_id_array.append(result['seat_id'])
     print(np.amax(np.array(seat_id_array)))
