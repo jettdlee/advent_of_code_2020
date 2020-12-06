@@ -1,4 +1,5 @@
 import constants
+import re
 from validators.fields_legal.year_validator import YearValidator
 from validators.fields_legal.height_validator import HeightValidator
 from validators.fields_legal.eye_colour_validator import EyeColourValidator
@@ -26,26 +27,26 @@ class FieldsLegalValidator:
     def validate(self, passport):
         for key, value in passport.items():
             if key == constants.COUNTRY_ID:
-                return True
-            validator = self.__get_validator(key)
-            if validator.validate(value) == False:
-                pdb.set_trace
-                print(f"{key}: {value}")
+                continue
+
+            if self.valdate_value(key, value) == False:
+                print(f"failed: {key} {value}")
                 return False
+
         return True
 
-    def __get_validator(self, key):
+    def valdate_value(self, key, value):
         if key == constants.BIRTH_YEAR:
-            return self.__birth_year_validator
+            return int(value) >= 1920 and int(value) <= 2002
         elif key == constants.ISSUE_YEAR: 
-            return self.__issue_year_validator
+            return int(value) >= 2010 and int(value) <= 2020
         elif key == constants.EXPIRATION_YEAR: 
-            return self.__expiration_year_validator
+            return int(value) >= 2020 and int(value) <= 2030
         elif key == constants.HEIGHT: 
-            return self.__height_validator
+            return len(re.findall("^((1([5-8][0-9]|9[0-3])cm)|((59|6[0-9]|7[0-6])in))$", value)) > 0
         elif key == constants.HAIR_COLOUR: 
-            return self.__hair_colour_validator
+            return len(re.findall("^#[0-9a-f]{6}$", value)) > 0
         elif key == constants.EYE_COLOUR: 
-            return self.__eye_colour_validator
+            return len(re.findall("^(amb|blu|brn|gry|grn|hzl|oth)$", value)) > 0
         elif key == constants.PASSPORT_ID: 
-            return self.__passport_id_validator
+            return len(re.findall("^0[0-9]{8}$", value)) > 0
