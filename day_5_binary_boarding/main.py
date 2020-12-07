@@ -54,6 +54,18 @@ class TicketChecker:
     def __get_seat_id(self, seating):
         return seating['row'] * 8 + seating['column']
 
+    def find_seat(self, seats):
+        seat_id_array = []
+        for seat in seats:
+            seat_id_array.append(seat['seat_id'])
+        
+        seat_range = np.array(range(np.amin(seat_id_array), np.amax(seat_id_array)))
+        result = []
+        for i in seat_range:
+            if i not in seat_id_array:
+                result.append(i)
+        return result
+
 if __name__ == '__main__':
     seating_range = np.array(range(128))
     column_range = np.array(range(8))
@@ -68,3 +80,6 @@ if __name__ == '__main__':
             print(result)
         seat_id_array.append(result['seat_id'])
     print(np.amax(np.array(seat_id_array)))
+
+    seat = checker.find_seat(results)
+    print(seat)
