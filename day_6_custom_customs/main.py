@@ -19,13 +19,13 @@ class ReadData:
 
 class CustomChecker:
 
-    def check_answers(self, data):
+    def check_answers(self, data, join="outer"):
         group_count = []
         for group in data:
             merged_answer = pd.DataFrame(group[0])
             for answers in group:
                 answer_to_merge = pd.DataFrame(answers)
-                merged_answer = pd.merge(merged_answer, answer_to_merge, how='outer') 
+                merged_answer = pd.merge(merged_answer, answer_to_merge, how=join) 
             # pdb.set_trace()
             group_count.append(merged_answer.shape[0])
         return group_count
@@ -37,4 +37,7 @@ if __name__ == "__main__":
 
     checker = CustomChecker()
     result = checker.check_answers(data.parsed_data)
-    print(np.sum(result))
+    print(f"result any: {np.sum(result)}")
+
+    result = checker.check_answers(data.parsed_data, 'inner')
+    print(f"result all: {np.sum(result)}")
