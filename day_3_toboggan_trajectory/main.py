@@ -37,7 +37,7 @@ class TobogganTrajectory:
 
 if __name__ == "__main__":
 
-    data_file = ImportData('dataset/day_3.data')
+    data_file = ImportData('day_3.data')
     trajectory = TobogganTrajectory(data_file.dataset) 
     result = trajectory.calculateTrajectory(3, 1)
     print(f"Part one: Hit - {result[0]}, Miss - {result[1]}")

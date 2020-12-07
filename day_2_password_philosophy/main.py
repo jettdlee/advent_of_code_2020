@@ -58,7 +58,7 @@ class PasswordChecker:
         return (password[first_position] == letter) ^ (password[second_position] == letter)
 
 if __name__ == "__main__":
-    dataFile = ImportData("dataset/day_2.data")
+    dataFile = ImportData("day_2.data")
     dataSplitter = DataSplitter(dataFile.dataset) 
     split_data = dataSplitter.splitPasswords()
     password_checker = PasswordChecker(split_data)

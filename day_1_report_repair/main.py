@@ -44,8 +44,7 @@ class Calculator:
         print(calculate_result)
 
 if __name__ == "__main__":
-
-    data_file = ImportData("dataset/day_1.data", True)
+    data_file = ImportData("day_1.data", True)
     checker = CheckData(data_file.dataset)
     results = checker.findTwoValuesForTarget(2020)
     Calculator.calculate(results)
