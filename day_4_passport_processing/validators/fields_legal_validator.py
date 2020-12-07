@@ -49,4 +49,4 @@ class FieldsLegalValidator:
         elif key == constants.EYE_COLOUR: 
             return len(re.findall("^(amb|blu|brn|gry|grn|hzl|oth)$", value)) > 0
         elif key == constants.PASSPORT_ID: 
-            return len(re.findall("^0[0-9]{8}$", value)) > 0
+            return len(re.findall("^[0-9]{9}$", value)) > 0
