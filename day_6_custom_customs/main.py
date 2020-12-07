@@ -14,8 +14,7 @@ class ReadData:
                 self.parsed_data.append(group)
                 group = []
                 continue
-            data_frame = pd.DataFrame(list(line))
-            group.append(data_frame)
+            group.append(list(line))
         self.parsed_data.append(group)
 
 class CustomChecker:
@@ -26,10 +25,10 @@ class CustomChecker:
             merged_answer = pd.DataFrame(group[0])
             for answers in group:
                 answer_to_merge = pd.DataFrame(answers)
-                merged_answer = pd.merge(merged_answer, answer_to_merge) 
+                merged_answer = pd.merge(merged_answer, answer_to_merge, how='outer') 
+            # pdb.set_trace()
             group_count.append(merged_answer.shape[0])
         return group_count
-
 
 if __name__ == "__main__":
     data_file = ImportData('dataset.data')
